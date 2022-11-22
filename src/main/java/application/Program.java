@@ -1,23 +1,40 @@
 package application;
 
 import data.FileReader;
-import entities.PregnantWoman;
+import entities.Pregnant;
+import neuralNetworks.SinglePerceptron;
+import services.ListSeparator;
 
+import javax.swing.*;
 import java.util.*;
 
 public class Program {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        List<PregnantWoman> pregnantWomanList = new ArrayList<PregnantWoman>();
+        List<Pregnant> pregnantList = new ArrayList<Pregnant>();
 
-        System.out.println("Digite o caminho do arquivo: ");
+        System.out.print("Digite o caminho do arquivo: ");
+        //C:\Users\bruno\Documents\MaternalHealthRiskDataSet.csv
+        String path = sc.next();
+        FileReader fileReader = new FileReader(path);
 
-        FileReader fileReader = new FileReader("C:\\Users\\bruno\\Downloads\\Maternal Health Risk Data Set.csv");
+        pregnantList = fileReader.uploadedData();
+        Collections.sort(pregnantList);
+        ListSeparator ls = new ListSeparator(pregnantList);
 
-        pregnantWomanList = fileReader.uploadedData();
-        Collections.sort(pregnantWomanList);
-        pregnantWomanList.forEach(System.out::println);
+        List<Pregnant> testList = ls.getTestList();
+        List<Pregnant> trainingList = ls.getTrainingList();
+
+        System.out.println("SIZE NORMAL : " + pregnantList.size());
+        System.out.println("SIZE TESTE : " + testList.size());
+        System.out.println("SIZE TREINAMENTO : " + trainingList.size());
+
+        SinglePerceptron singlePerceptron = new SinglePerceptron();
+        singlePerceptron.trainingPhase(trainingList);
+
+        Pregnant test = new Pregnant(45,120,95,6.1,98,66,1);
+        System.out.println("AQUI" + singlePerceptron.operationPhase(test));
         sc.close();
     }
 }

@@ -1,6 +1,6 @@
 package data;
 
-import entities.PregnantWoman;
+import entities.Pregnant;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -22,9 +22,9 @@ public class FileReader {
         this.path = path;
     }
 
-    public List<PregnantWoman> uploadedData(){
+    public List<Pregnant> uploadedData(){
         try{
-            List<PregnantWoman> pregnantWomanList = new ArrayList<PregnantWoman>();
+            List<Pregnant> pregnantList = new ArrayList<Pregnant>();
             BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(this.path));
             String line = bufferedReader.readLine();
             String[] assistent = line.split(",");
@@ -41,16 +41,16 @@ public class FileReader {
                     assistent[6] = "3";
                 }
 
-                PregnantWoman pregnantWoman = new PregnantWoman();
+                Pregnant pregnant = new Pregnant();
 
-                pregnantWoman.setAge(Integer.parseInt(age));
-                pregnantWoman.setSystolicBP(Double.parseDouble(assistent[1]));
-                pregnantWoman.setDiastolicBP(Double.parseDouble(assistent[2]));
-                pregnantWoman.setBs(Double.parseDouble(assistent[3]));
-                pregnantWoman.setBodyTemp(Double.parseDouble(assistent[4]));
-                pregnantWoman.setHeartRate(Double.parseDouble(assistent[5]));
-                pregnantWoman.setRiskLevel(Integer.parseInt(assistent[6]));
-                pregnantWomanList.add(pregnantWoman);
+                pregnant.setAge(Integer.parseInt(age));
+                pregnant.setSystolicBP(Double.parseDouble(assistent[1]));
+                pregnant.setDiastolicBP(Double.parseDouble(assistent[2]));
+                pregnant.setBs(Double.parseDouble(assistent[3]));
+                pregnant.setBodyTemp(Double.parseDouble(assistent[4]));
+                pregnant.setHeartRate(Double.parseDouble(assistent[5]));
+                pregnant.setRiskLevel(Integer.parseInt(assistent[6]));
+                pregnantList.add(pregnant);
                 line = bufferedReader.readLine();
                 if(line!=null){
                     assistent = line.split(",");
@@ -58,7 +58,7 @@ public class FileReader {
                 }
             }
             bufferedReader.close();
-            return pregnantWomanList;
+            return pregnantList;
         }catch (Exception e){
             System.out.println("Error! Error in file reading, caused by: " + e.getMessage());
             return null;

@@ -1,6 +1,6 @@
 package entities;
 
-public class PregnantWoman implements Comparable<PregnantWoman>{
+public class Pregnant implements Comparable<Pregnant> {
 
     private int age;
     private double systolicBP; //pressão arterial mais alta
@@ -10,10 +10,10 @@ public class PregnantWoman implements Comparable<PregnantWoman>{
     private double heartRate; // Frequencia cardíaca
     private int riskLevel;
 
-    public PregnantWoman(){
+    public Pregnant(){
     }
 
-    public PregnantWoman(int age, double systolicBP, double diastolicBP, double bs, double bodyTemp, double heartRate, int riskLevel) {
+    public Pregnant(int age, double systolicBP, double diastolicBP, double bs, double bodyTemp, double heartRate, int riskLevel) {
         this.age = age;
         this.systolicBP = systolicBP;
         this.diastolicBP = diastolicBP;
@@ -81,19 +81,18 @@ public class PregnantWoman implements Comparable<PregnantWoman>{
 
     @Override
     public String toString() {
-        return "PregnantWoman{" +
-                "age=" + age +
-                ", systolicBP=" + systolicBP +
-                ", diastolicBP=" + diastolicBP +
-                ", bs=" + bs +
-                ", bodyTemp=" + bodyTemp +
-                ", heartRate=" + heartRate +
-                ", riskLevel='" + riskLevel + '\'' +
-                '}';
+        return
+                "\t|age=" + age +
+                "\t|systolicBP=" + systolicBP +
+                "\t|diastolicBP=" + diastolicBP +
+                "\t|bs=" + bs +
+                "\t|bodyTemp=" + bodyTemp +
+                "\t|heartRate=" + heartRate +
+                "\t|riskLevel='" + riskLevel + "\t|";
     }
 
     @Override
-    public int compareTo(PregnantWoman o) {
+    public int compareTo(Pregnant o) {
         if(getRiskLevel()==o.getRiskLevel()){
             return 0;
         }else if(getRiskLevel()>o.getRiskLevel()){
