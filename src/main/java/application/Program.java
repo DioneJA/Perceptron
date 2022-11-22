@@ -11,7 +11,6 @@ import java.util.*;
 public class Program {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         List<Pregnant> pregnantList = new ArrayList<Pregnant>();
 
         System.out.print("Digite o caminho do arquivo: ");
@@ -21,20 +20,27 @@ public class Program {
 
         pregnantList = fileReader.uploadedData();
         Collections.sort(pregnantList);
-        ListSeparator ls = new ListSeparator(pregnantList);
+        for(int i=0;i<10;i++){
+            ListSeparator ls = new ListSeparator(pregnantList);
 
-        List<Pregnant> testList = ls.getTestList();
-        List<Pregnant> trainingList = ls.getTrainingList();
+            List<Pregnant> testList = ls.getTestList();
+            List<Pregnant> trainingList = ls.getTrainingList();
 
-        System.out.println("SIZE NORMAL : " + pregnantList.size());
-        System.out.println("SIZE TESTE : " + testList.size());
-        System.out.println("SIZE TREINAMENTO : " + trainingList.size());
+            SinglePerceptron singlePerceptron = new SinglePerceptron();
+            singlePerceptron.trainingPhase(trainingList);
 
-        SinglePerceptron singlePerceptron = new SinglePerceptron();
-        singlePerceptron.trainingPhase(trainingList);
-
-        Pregnant test = new Pregnant(45,120,95,6.1,98,66,1);
-        System.out.println("AQUI" + singlePerceptron.operationPhase(test));
+            double acurace = 0;
+            int hit=0;
+            for(Pregnant pregnant: testList){
+                int assistent = singlePerceptron.operationPhase(pregnant);
+                if(assistent == pregnant.getRiskLevel()){
+                    hit++;
+                }
+            }
+            acurace = (hit*100)/testList.size();
+            System.out.println("\nEPOCH : 1000");
+            System.out.println("ACURACE : " +acurace + "%\n");
+        }
         sc.close();
     }
 }

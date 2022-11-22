@@ -33,21 +33,21 @@ public class ListSeparator {
         int mediumRiskSize = mediumRisk.size();
         int highRiskSize = highRisk.size();
         Random rand = new Random();
-        while (counter < Math.floor(lowRiskSize * 0.3)) {
+        while (counter < 135) {
             int random = rand.nextInt(lowRisk.size());
             testList.add(lowRisk.get(random));
             lowRisk.remove(random);
             counter++;
         }
         counter = 0;
-        while (counter < Math.floor(mediumRiskSize * 0.3)) {
+        while (counter < 135) {
             int random = rand.nextInt(mediumRisk.size());
             testList.add(mediumRisk.get(random));
             mediumRisk.remove(random);
             counter++;
         }
         counter = 0;
-        while (counter < Math.floor(highRiskSize * 0.3)) {
+        while (counter < 135) {
             int random = rand.nextInt(highRisk.size());
             testList.add(highRisk.get(random));
             highRisk.remove(random);
